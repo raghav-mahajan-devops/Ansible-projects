@@ -1,0 +1,30 @@
+- name: Packages installation
+  hosts: servers
+  become: yes
+
+  vars:
+    packages_to_install:
+    - nginx
+    - tree
+    - zip
+    - unzip
+    - docker.io
+
+  tasks:
+    - name: Install packages
+      apt: 
+        name: "{{ item }}"
+        state: present
+        update_cache: yes
+      loop: "{{ packages_to_install }}"
+    
+    - name: Verify package installation
+      command: dpkg -l {{ item }}
+      loop: "{{ packages_to_install }}"
+      register: package_check
+      ignore_errors: yes
+
+    - name: Display package installation results
+      loop: "{{ packages_to_install}}"
+      debug:
+        msg: "packages {{ item }} " 
