@@ -1,0 +1,19 @@
+# Vault password files: the encrypted vars file is committed, the password never is
+vault.txt
+*.vault-pass
+.vault_pass*
+new_vault.txt
+
+# Keys and local secrets
+*.pem
+*.key
+.env
+
+# Ansible runtime files
+*.retry
+__pycache__/
+*.pyc
+
+# OS files
+.DS_Store
+Thumbs.db
